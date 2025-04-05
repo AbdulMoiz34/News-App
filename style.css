@@ -229,7 +229,33 @@ body {
     border-radius: 50%;
 }
 
-/* Animations removed */
+/* Animations */
+@keyframes fadeIn {
+    from { opacity: 0; }
+    to { opacity: 1; }
+}
+
+@keyframes slideUp {
+    from {
+        opacity: 0;
+        transform: translateY(30px);
+    }
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
+@keyframes scaleIn {
+    from {
+        transform: scale(0.9);
+        opacity: 0;
+    }
+    to {
+        transform: scale(1);
+        opacity: 1;
+    }
+}
 
 /* Card animations */
 .card {
@@ -240,11 +266,28 @@ body {
     transition: all var(--transition-speed) ease;
     transform: translateY(0);
     background: white;
+    position: relative;
+}
+
+.card::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 4px;
+    height: 0;
+    background: linear-gradient(to bottom, var(--primary-color), var(--secondary-color));
+    transition: height 0.5s ease;
+    z-index: 1;
 }
 
 .card:hover {
     transform: translateY(-10px);
     box-shadow: 0 15px 30px rgba(0, 0, 0, 0.15);
+}
+
+.card:hover::before {
+    height: 100%;
 }
 
 .card img {
@@ -259,17 +302,29 @@ body {
 
 .card-body {
     padding: 1.5rem;
+    position: relative;
+    z-index: 2;
 }
 
 .card-title {
     font-weight: 600;
     margin-bottom: 1rem;
     color: var(--dark-color);
+    transition: all var(--transition-speed) ease;
+}
+
+.card:hover .card-title {
+    transform: translateX(8px);
 }
 
 .card-text {
     color: #555;
     margin-bottom: 1.5rem;
+    transition: all var(--transition-speed) ease;
+}
+
+.card:hover .card-text {
+    transform: translateX(5px);
 }
 
 .card .btn {
@@ -279,12 +334,29 @@ body {
     transition: all var(--transition-speed) ease;
     background-color: var(--dark-color);
     border: none;
+    position: relative;
+    overflow: hidden;
+}
+
+.card .btn::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: -100%;
+    width: 100%;
+    height: 100%;
+    background: linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.2), transparent);
+    transition: all 0.5s ease;
 }
 
 .card .btn:hover {
     background-color: var(--primary-color);
     transform: translateY(-3px);
     box-shadow: 0 5px 15px rgba(0, 0, 0, 0.1);
+}
+
+.card .btn:hover::before {
+    left: 100%;
 }
 
 .footer {
@@ -302,7 +374,7 @@ body {
     color: #f1c40f;
 }
 
-/* Loading styles */
+/* Modern Loading Animation */
 .loader-box {
     display: none;
     justify-content: center;
@@ -310,6 +382,58 @@ body {
     padding: 2rem 0;
     position: relative;
     height: 100px;
+}
+
+/* Skeleton Loading Animation */
+.skeleton-loader {
+    background: linear-gradient(90deg, #f0f0f0 25%, #e0e0e0 50%, #f0f0f0 75%);
+    background-size: 200% 100%;
+    animation: shimmer 1.5s infinite;
+    border-radius: 16px;
+    height: 100%;
+    width: 100%;
+}
+
+@keyframes shimmer {
+    0% { background-position: -200% 0; }
+    100% { background-position: 200% 0; }
+}
+
+/* Search Form Styling */
+.search-form {
+    position: relative;
+    transition: all 0.3s ease;
+}
+
+.search-form input {
+    border-radius: 50px;
+    padding-left: 15px;
+    border: none;
+    background-color: rgba(255, 255, 255, 0.1);
+    color: white;
+    transition: all 0.3s ease;
+}
+
+.search-form input::placeholder {
+    color: rgba(255, 255, 255, 0.7);
+}
+
+.search-form input:focus {
+    background-color: rgba(255, 255, 255, 0.2);
+    box-shadow: 0 0 0 0.25rem rgba(255, 69, 0, 0.25);
+    border: none;
+}
+
+.search-form button {
+    border-radius: 50px;
+    padding: 0.375rem 1rem;
+    transition: all 0.3s ease;
+}
+
+.search-form button:hover {
+    background-color: var(--primary-color);
+    color: white;
+    transform: translateY(-2px);
 }
 
 @media only screen and (max-width: 700px) {

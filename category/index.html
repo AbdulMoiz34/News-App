@@ -7,8 +7,9 @@
     <title>Categories</title>
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css">
     <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600&display=swap">
-    <!-- GSAP removed -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.2/gsap.min.js"></script>
     <link rel="stylesheet" href="style.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/animate.css/4.1.1/animate.min.css">
     <script src="https://unpkg.com/@dotlottie/player-component@2.7.12/dist/dotlottie-player.mjs" type="module"></script>
 </head>
 
@@ -22,13 +23,11 @@
                 <span class="navbar-toggler-icon"></span>
             </button>
             <div class="collapse navbar-collapse" id="navbarNav">
-                <ul class="navbar-nav ms-auto">
+                <ul class="navbar-nav me-auto">
                     <li class="nav-item"><a class="nav-link active" href="/">Home</a></li>
                     <li class="nav-item"><a class="nav-link" href="/category/index.html?q=world">World</a></li>
-                    <li class="nav-item"><a class="nav-link" href="/category/index.html?q=Politics">Politics</a>
-                    </li>
-                    <li class="nav-item"><a class="nav-link" href="/category/index.html?q=Technology">Technology</a>
-                    </li>
+                    <li class="nav-item"><a class="nav-link" href="/category/index.html?q=Politics">Politics</a></li>
+                    <li class="nav-item"><a class="nav-link" href="/category/index.html?q=Technology">Technology</a></li>
                     <li class="nav-item"><a class="nav-link" href="/category/index.html?q=Sports">Sports</a></li>
                     <li class="nav-item dropdown">
                         <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button"
@@ -36,14 +35,17 @@
                             More
                         </a>
                         <ul class="dropdown-menu" aria-labelledby="navbarDropdown">
-                            <li><a class="dropdown-item" href="/category/index.html?q=entertainment">Entertainment</a>
-                            </li>
-                            <li><a class="dropdown-item" href="/category/index.html?q=health" target="_blank">Health</a>
-                            </li>
+                            <li><a class="dropdown-item" href="/category/index.html?q=entertainment">Entertainment</a></li>
+                            <li><a class="dropdown-item" href="/category/index.html?q=health">Health</a></li>
                             <li><a class="dropdown-item" href="/category/index.html?q=science">Science</a></li>
                         </ul>
                     </li>
                 </ul>
+                <!-- Search Form -->
+                <form class="d-flex search-form" id="searchForm">
+                    <input class="form-control me-2" type="search" placeholder="Search news..." aria-label="Search" id="searchInput">
+                    <button class="btn btn-outline-light" type="submit">Search</button>
+                </form>
             </div>
         </div>
     </nav>
@@ -95,7 +97,7 @@
             </div>
         </div>
     </footer>
-    <!-- GSAP ScrollTrigger removed -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.2/ScrollTrigger.min.js"></script>
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
     <script src="./app.js" type="module"></script>
 </body>
