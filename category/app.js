@@ -15,11 +15,14 @@ const displayCatgories = (type, categories) => {
     const categoryHeading = document.querySelector(".category-heading");
     categoryHeading.textContent = type;
 
-    // Clear existing content
     categoryList.innerHTML = '';
+    if (!categories || categories.length === 0) {
+        categoryList.innerHTML = `<div class="col-12 text-center"><h3>No news available for ${type}</h3></div>`;
+        return;
+    }
 
-    // Add news items
     categories.forEach(category => {
+        if (!category) return;
         categoryList.innerHTML += `
         <a target="_blank" href="${category.url}" class="col-md-4 mb-4 text-decoration-none text-black">
             <div class="card">
@@ -37,15 +40,12 @@ const main = async () => {
     const query = getQuaryParams();
 
     try {
-        // Show loading message
         const categoryList = document.querySelector(".news-list");
         categoryList.innerHTML = `
         <div class="col-12 text-center">
             <h3>Loading ${query} news...</h3>
         </div>`;
-
         const news = await getNewsFromCategory(query);
-
         if (!news.articles || news.articles.length === 0) {
             categoryList.innerHTML = `
             <div class="col-12 text-center">
@@ -54,12 +54,9 @@ const main = async () => {
             </div>`;
             return;
         }
-
         displayCatgories(query, news.articles);
-
     } catch (err) {
         console.log(err);
-        // Show error message to user
         const categoryList = document.querySelector(".news-list");
         categoryList.innerHTML = `
         <div class="col-12 text-center">
@@ -68,4 +65,5 @@ const main = async () => {
         </div>`;
     }
 }
+
 main();
