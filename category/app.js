@@ -18,14 +18,13 @@ const getQuaryParams = () => {
 
 const getNewsFromCategory = async (cetegory) => {
     const res = await fetch(`https://newsapi.org/v2/top-headlines?q=${cetegory}&apiKey=${API_KEY}`);
-    return await res.json();
+    return res.json();
 }
 
 const displayCatgories = (type, categories) => {
     const categoryList = document.querySelector(".news-list");
     const categoryHeading = document.querySelector(".category-heading");
     categoryHeading.textContent = type;
-    console.log(categories)
     for (let category of categories) {
         categoryList.innerHTML += `<a target="_blank" href="${category.url}" class="col-md-4 mb-4 text-decoration-none text-black">
                     <div class="card p-4 shadow rounded">  
@@ -39,7 +38,7 @@ const displayCatgories = (type, categories) => {
 
 const main = async () => {
     const loader = document.getElementById("loader-box");
-    loader.classList.toggle("d-none");
+    loader.classList.remove("d-none");
     const query = getQuaryParams();
     try {
         const news = await getNewsFromCategory(query);
@@ -47,7 +46,7 @@ const main = async () => {
     } catch (err) {
         console.log(err);
     }
-    loader.classList.toggle("d-none");
+    loader.classList.add("d-none");
 }
 
 main();
