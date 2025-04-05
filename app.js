@@ -1,80 +1,4 @@
-// Reusable GSAP Animation Function
-function animateElement(selector, options) {
-    gsap.from(selector, {
-        duration: 1,
-        opacity: 0,
-        ease: "power2.out",
-        ...options
-    });
-}
-
-// ScrollTrigger options for reusability
-const scrollTriggerOptions = (trigger, start) => ({
-    trigger: trigger,
-    start: start,
-    toggleActions: "play none none none"
-});
-
-// Applying animations
-animateElement(".navbar", { y: -50 });
-animateElement(".nav-item", { y: -20, stagger: 0.2 });
-animateElement(".hero-content h1", { y: 30, delay: 0.5 });
-animateElement(".hero-content p", { y: 20, delay: 0.7 });
-animateElement(".hero-content a", { y: 20, delay: 0.9 });
-
-animateElement(".latest-news h2", {
-    y: 30,
-    scrollTrigger: scrollTriggerOptions(".latest-news", "top 80%")
-});
-
-animateElement(".card", {
-    y: 50,
-    stagger: 0.3,
-    scrollTrigger: scrollTriggerOptions(".latest-news", "top 50%")
-});
-
-animateElement(".featured-stories h2", {
-    y: 30,
-    scrollTrigger: scrollTriggerOptions(".featured-stories", "top 80%")
-});
-
-animateElement(".featured-stories .row", {
-    x: -50,
-    stagger: 0.3,
-    scrollTrigger: scrollTriggerOptions(".featured-stories", "top 85%")
-});
-
-animateElement(".categories h2", {
-    y: 30,
-    scrollTrigger: scrollTriggerOptions(".categories", "top 80%")
-});
-
-animateElement(".category-card", {
-    scale: 0.8,
-    stagger: 0.2,
-    scrollTrigger: scrollTriggerOptions(".categories", "top 85%")
-});
-
-animateElement(".newsletter-subscription h2", {
-    y: 30,
-    scrollTrigger: scrollTriggerOptions(".newsletter-subscription", "top 80%")
-});
-
-animateElement(".newsletter-subscription .subscription-form", {
-    y: 50,
-    scrollTrigger: scrollTriggerOptions(".newsletter-subscription", "top 85%")
-});
-
-animateElement(".footer h5", {
-    y: 30,
-    scrollTrigger: scrollTriggerOptions(".footer", "top 80%")
-});
-
-animateElement(".footer .list-unstyled li", {
-    x: -50,
-    stagger: 0.2,
-    scrollTrigger: scrollTriggerOptions(".footer", "top 85%")
-});
+// Animation code removed
 
 
 
@@ -94,20 +18,22 @@ const categories = [
 
 const displayNews = (news) => {
     const newsBoxEl = document.querySelector(".news-list");
-    for (let newsObj of news) {
+    newsBoxEl.innerHTML = ''; // Clear existing content
+
+    // Add news items
+    news.forEach(newsObj => {
         newsBoxEl.innerHTML += `
-         <div class="col-md-6 col-lg-4 mt-4">
-                    <div class="card">
-                        <img src="${newsObj.urlToImage}" class="card-img-top" alt="News">
-                        <div class="card-body">
-                            <h4 class="card-title">${newsObj.title}</h4>
-                            <p class="card-text">${newsObj.description}</p>
-                            <a href="${newsObj.url}" target="blank" class="btn btn-dark">Read More</a>
-                        </div>
-                    </div>
-                </div>`;
-    }
-    console.log(news);
+        <div class="col-md-6 col-lg-4 mt-4">
+            <div class="card">
+                <img src="${newsObj.urlToImage || 'https://via.placeholder.com/300x200?text=News'}" class="card-img-top" alt="News">
+                <div class="card-body">
+                    <h4 class="card-title">${newsObj.title || 'News Title'}</h4>
+                    <p class="card-text">${newsObj.description || 'No description available'}</p>
+                    <a href="${newsObj.url}" target="blank" class="btn btn-dark">Read More</a>
+                </div>
+            </div>
+        </div>`;
+    });
 }
 
 const getNewsFromCategory = async (cetegory) => {
@@ -130,40 +56,56 @@ const displayCatgories = () => {
 
 const displayFeaturedStories = (stories) => {
     const el = document.querySelector(".featured-list");
-    for (let story of stories) {
-        console.log(story);
-        el.innerHTML += `<div class="row align-items-center mb-4">
-                <div class="col-md-6">
-                    <img src="${story.urlToImage}" class="img-fluid rounded"
-                        alt="Featured Story">
-                </div>
-                <div class="col-md-6">
-                    <h3>${story.title}</h3>
-                    <p>${story.description.length > 50 ? story.description.slice(0, 50) + "..." : story.description}</p>
-                    <a href="${story.url}" class="btn btn-dark">Read More</a>
-                </div>
-            </div>`
-    }
-    el.innerHTML += ``;
+    el.innerHTML = ''; // Clear existing content
+
+    // Add featured stories
+    stories.forEach(story => {
+        el.innerHTML += `
+        <div class="row align-items-center mb-4">
+            <div class="col-md-6">
+                <img src="${story.urlToImage || 'https://via.placeholder.com/600x400?text=Featured+Story'}" class="img-fluid rounded"
+                    alt="Featured Story">
+            </div>
+            <div class="col-md-6">
+                <h3>${story.title || 'Featured Story'}</h3>
+                <p>${story.description ? (story.description.length > 100 ? story.description.slice(0, 100) + "..." : story.description) : 'No description available'}</p>
+                <a href="${story.url}" class="btn btn-dark">Read More</a>
+            </div>
+        </div>`;
+    });
 }
 
+const displayCategoryCards = () => {
+    displayCatgories();
+};
+
 const main = async () => {
-    const loaderBox = document.querySelector(".loader-box");
     try {
-        displayCatgories();
-        loaderBox.style.display = "flex";
+        // Display categories first (no need to wait for API)
+        displayCategoryCards();
+
+        // Show loading message
+        const newsBoxEl = document.querySelector(".news-list");
+        newsBoxEl.innerHTML = `<div class="col-12 text-center"><h3>Loading latest news...</h3></div>`;
+
+        // Fetch data
         const worldNews = await getNewsFromCategory("world");
         if (worldNews.message) {
             throw new Error(worldNews.message);
         }
         const stories = await getNewsFromCategory("business");
+
+        // Display content with animations
         displayNews(worldNews.articles);
         displayFeaturedStories(stories.articles);
+
     } catch (err) {
         console.log(err);
-    } finally {
-        loaderBox.style.display = "none";
-        console.log(loaderBox)
+        // Show error message to user
+        const newsBoxEl = document.querySelector(".news-list");
+        if (newsBoxEl) {
+            newsBoxEl.innerHTML = `<div class="col-12 text-center"><h3>Sorry, we couldn't load the news. Please try again later.</h3></div>`;
+        }
     }
 }
 

@@ -1,15 +1,4 @@
 const API_KEY = "cdbe0365d06a4a0f91f9f6ae0e018036";
-function animateElement(selector, options) {
-    gsap.from(selector, {
-        duration: 1,
-        opacity: 0,
-        ease: "power2.out",
-        ...options
-    });
-}
-
-animateElement(".navbar", { y: -50 });
-animateElement(".nav-item", { y: -20, stagger: 0.2 });
 
 const getQuaryParams = () => {
     const params = new URLSearchParams(location.search);
@@ -25,30 +14,58 @@ const displayCatgories = (type, categories) => {
     const categoryList = document.querySelector(".news-list");
     const categoryHeading = document.querySelector(".category-heading");
     categoryHeading.textContent = type;
-    for (let category of categories) {
-        categoryList.innerHTML += `<a target="_blank" href="${category.url}" class="col-md-4 mb-4 text-decoration-none text-black">
-                    <div class="card p-4 shadow rounded">  
-                        <img src="${category.urlToImage}" alt="image">
-                        <h4 class="mt-3">${category.title}</h4>
-                        <p>${category.description}</p>
-                    </div>
-                </a>`;
-    }
+
+    // Clear existing content
+    categoryList.innerHTML = '';
+
+    // Add news items
+    categories.forEach(category => {
+        categoryList.innerHTML += `
+        <a target="_blank" href="${category.url}" class="col-md-4 mb-4 text-decoration-none text-black">
+            <div class="card">
+                <img src="${category.urlToImage || 'https://via.placeholder.com/300x200?text=News'}" alt="image">
+                <div class="card-body">
+                    <h4 class="card-title">${category.title || 'News Title'}</h4>
+                    <p class="card-text">${category.description || 'No description available'}</p>
+                </div>
+            </div>
+        </a>`;
+    });
 }
 
 const main = async () => {
-    const loader = document.getElementById("loader-box");
-    loader.classList.remove("d-none");
     const query = getQuaryParams();
+
     try {
+        // Show loading message
+        const categoryList = document.querySelector(".news-list");
+        categoryList.innerHTML = `
+        <div class="col-12 text-center">
+            <h3>Loading ${query} news...</h3>
+        </div>`;
+
         const news = await getNewsFromCategory(query);
+
+        if (!news.articles || news.articles.length === 0) {
+            categoryList.innerHTML = `
+            <div class="col-12 text-center">
+                <h3>No news found for "${query}"</h3>
+                <p>Try searching for a different category</p>
+            </div>`;
+            return;
+        }
+
         displayCatgories(query, news.articles);
+
     } catch (err) {
         console.log(err);
+        // Show error message to user
+        const categoryList = document.querySelector(".news-list");
+        categoryList.innerHTML = `
+        <div class="col-12 text-center">
+            <h3>Sorry, we couldn't load the news</h3>
+            <p>Please try again later</p>
+        </div>`;
     }
-    loader.classList.add("d-none");
 }
-
 main();
-
-

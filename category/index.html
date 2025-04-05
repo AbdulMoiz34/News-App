@@ -7,7 +7,7 @@
     <title>Categories</title>
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css">
     <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600&display=swap">
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.2/gsap.min.js"></script>
+    <!-- GSAP removed -->
     <link rel="stylesheet" href="style.css">
     <script src="https://unpkg.com/@dotlottie/player-component@2.7.12/dist/dotlottie-player.mjs" type="module"></script>
 </head>
@@ -49,12 +49,9 @@
     </nav>
 
     <main>
-        <div class="position-absolute end-50 d-none" id="loader-box">
-            <div class="loader"></div>
-        </div>
         <div class="container">
-            <div class="d-flex justify-content-center mt-4">
-                <h2 class=" fw-bold btn-primary text-white d-inline-block category-heading text-capitalize"></h2>
+            <div class="d-flex justify-content-center mt-5 mb-4">
+                <h2 class="fw-bold btn-primary text-white d-inline-block category-heading text-capitalize px-4 py-2 rounded-pill"></h2>
             </div>
             <div class="row news-list mt-4"></div>
         </div>
@@ -98,8 +95,7 @@
             </div>
         </div>
     </footer>
-    <!-- Include GSAP ScrollTrigger -->
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.2/ScrollTrigger.min.js"></script>
+    <!-- GSAP ScrollTrigger removed -->
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
     <script src="./app.js" type="module"></script>
 </body>
