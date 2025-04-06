@@ -26,7 +26,8 @@
                     <li class="nav-item"><a class="nav-link active" href="/">Home</a></li>
                     <li class="nav-item"><a class="nav-link" href="/category/index.html?q=world">World</a></li>
                     <li class="nav-item"><a class="nav-link" href="/category/index.html?q=Politics">Politics</a></li>
-                    <li class="nav-item"><a class="nav-link" href="/category/index.html?q=Technology">Technology</a></li>
+                    <li class="nav-item"><a class="nav-link" href="/category/index.html?q=Technology">Technology</a>
+                    </li>
                     <li class="nav-item"><a class="nav-link" href="/category/index.html?q=Sports">Sports</a></li>
                     <li class="nav-item dropdown">
                         <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button"
@@ -34,7 +35,8 @@
                             More
                         </a>
                         <ul class="dropdown-menu" aria-labelledby="navbarDropdown">
-                            <li><a class="dropdown-item" href="/category/index.html?q=entertainment">Entertainment</a></li>
+                            <li><a class="dropdown-item" href="/category/index.html?q=entertainment">Entertainment</a>
+                            </li>
                             <li><a class="dropdown-item" href="/category/index.html?q=health">Health</a></li>
                             <li><a class="dropdown-item" href="/category/index.html?q=science">Science</a></li>
                         </ul>
@@ -42,8 +44,10 @@
                 </ul>
                 <!-- Search Form -->
                 <form class="d-flex search-form" id="searchForm">
-                    <input class="form-control me-2" type="search" placeholder="Search news..." aria-label="Search" id="searchInput">
+                    <input class="form-control me-2 text-white" type="search" placeholder="Search news..."
+                        aria-label="Search" id="searchInput">
                     <button class="btn btn-outline-light" type="submit">Search</button>
+                    <audio src="./assets/sound.mp3" id="audioPlayer" preload="auto"></audio>
                 </form>
             </div>
         </div>
@@ -66,7 +70,8 @@
         <div class="container">
             <h2 class="text-center mb-5 position-relative">
                 <span class="position-relative">Latest News
-                    <span class="position-absolute" style="height: 4px; width: 50%; bottom: -10px; left: 25%; background: linear-gradient(90deg, var(--primary-color), var(--secondary-color));"></span>
+                    <span class="position-absolute"
+                        style="height: 4px; width: 50%; bottom: -10px; left: 25%; background: linear-gradient(90deg, var(--primary-color), var(--secondary-color));"></span>
                 </span>
             </h2>
             <div class="row news-list">
@@ -89,7 +94,8 @@
         <div class="container">
             <h2 class="text-center mb-5 position-relative">
                 <span class="position-relative">Featured Stories
-                    <span class="position-absolute" style="height: 4px; width: 50%; bottom: -10px; left: 25%; background: linear-gradient(90deg, var(--primary-color), var(--secondary-color));"></span>
+                    <span class="position-absolute"
+                        style="height: 4px; width: 50%; bottom: -10px; left: 25%; background: linear-gradient(90deg, var(--primary-color), var(--secondary-color));"></span>
                 </span>
             </h2>
             <div class="featured-list"></div>
@@ -100,7 +106,8 @@
         <div class="container">
             <h2 class="text-center mb-5 position-relative">
                 <span class="position-relative">Explore News by Category
-                    <span class="position-absolute" style="height: 4px; width: 50%; bottom: -10px; left: 25%; background: linear-gradient(90deg, var(--primary-color), var(--secondary-color));"></span>
+                    <span class="position-absolute"
+                        style="height: 4px; width: 50%; bottom: -10px; left: 25%; background: linear-gradient(90deg, var(--primary-color), var(--secondary-color));"></span>
                 </span>
             </h2>
             <div class="row news-by-catergories"></div>

@@ -197,14 +197,13 @@ const displayCategoryCards = () => {
     displayCatgories();
 };
 
-// Handle search form submission
 const handleSearch = async (event) => {
     event.preventDefault();
     const searchInput = document.getElementById('searchInput');
     const query = searchInput.value.trim();
-
-    if (!query) return; // Don't search if query is empty
-
+    const audio = document.getElementById("audioPlayer");
+    if (!query) return;
+    audio.play();
     // Show loading animation
     const newsBoxEl = document.querySelector(".news-list");
     newsBoxEl.innerHTML = `
@@ -218,18 +217,14 @@ const handleSearch = async (event) => {
     </div>`;
 
     try {
-        // Search for news
         const searchResults = await searchNews(query);
 
-        // Clear featured stories section
         const featuredList = document.querySelector(".featured-list");
         featuredList.innerHTML = '';
 
-        // Update section title
         const latestNewsTitle = document.querySelector(".latest-news h2");
         latestNewsTitle.innerHTML = `Search Results for "${query}"`;
 
-        // Display search results
         if (searchResults.articles && searchResults.articles.length > 0) {
             displayNews(searchResults.articles);
         } else {
@@ -247,16 +242,12 @@ const handleSearch = async (event) => {
 
 const main = async () => {
     try {
-        // Set up search form event listener
         const searchForm = document.getElementById('searchForm');
         if (searchForm) {
             searchForm.addEventListener('submit', handleSearch);
         }
-
-        // Animate navbar items on page load
         animateElement('.nav-item', 0.2, 0.5);
 
-        // Animate hero content
         gsap.fromTo('.hero-content h1',
             { opacity: 0, y: 30 },
             { opacity: 1, y: 0, duration: 0.8, delay: 0.3, ease: "power2.out" }
@@ -272,10 +263,7 @@ const main = async () => {
             { opacity: 1, y: 0, duration: 0.8, delay: 0.7, ease: "power2.out" }
         );
 
-        // Display categories first
         displayCategoryCards();
-
-        // Show modern loading animation
         const newsBoxEl = document.querySelector(".news-list");
         newsBoxEl.innerHTML = `
         <div class="col-12 text-center">
@@ -286,7 +274,6 @@ const main = async () => {
                 <h3 class="mt-4" style="animation: fadeIn 1s ease;">Loading latest news...</h3>
             </div>
         </div>`;
-
         // Add spin animation
         const style = document.createElement('style');
         style.innerHTML = `
@@ -297,18 +284,15 @@ const main = async () => {
         `;
         document.head.appendChild(style);
 
-        // Fetch data
         const worldNews = await getNewsFromCategory("world");
         if (worldNews.message) {
             throw new Error(worldNews.message);
         }
         const stories = await getNewsFromCategory("business");
 
-        // Display content with animations
         displayNews(worldNews.articles);
         displayFeaturedStories(stories.articles);
 
-        // Animate section headings when they come into view
         gsap.utils.toArray('section h2').forEach(heading => {
             gsap.fromTo(heading,
                 { opacity: 0, y: 30 },
@@ -326,7 +310,6 @@ const main = async () => {
 
     } catch (err) {
         console.log(err);
-        // Show error message to user
         const newsBoxEl = document.querySelector(".news-list");
         if (newsBoxEl) {
             newsBoxEl.innerHTML = `<div class="col-12 text-center"><h3 class="animate__animated animate__fadeIn">Sorry, we couldn't load the news. Please try again later.</h3></div>`;

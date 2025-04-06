@@ -109,9 +109,9 @@ const handleSearch = async (event) => {
     event.preventDefault();
     const searchInput = document.getElementById('searchInput');
     const query = searchInput.value.trim();
-
-    if (!query) return; // Don't search if query is empty
-
+    const audio = document.getElementById("audioPlayer");
+    if (!query) return;
+    audio.play();
     // Show loading animation
     const categoryList = document.querySelector(".news-list");
     const categoryHeading = document.querySelector(".category-heading");

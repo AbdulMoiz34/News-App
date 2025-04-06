@@ -14,7 +14,6 @@
 </head>
 
 <body>
-    <!-- Navbar -->
     <nav class="navbar navbar-expand-lg navbar-dark bg-dark shadow">
         <div class="container">
             <a class="navbar-brand" href="/">NewsHub</a>
@@ -27,7 +26,8 @@
                     <li class="nav-item"><a class="nav-link active" href="/">Home</a></li>
                     <li class="nav-item"><a class="nav-link" href="/category/index.html?q=world">World</a></li>
                     <li class="nav-item"><a class="nav-link" href="/category/index.html?q=Politics">Politics</a></li>
-                    <li class="nav-item"><a class="nav-link" href="/category/index.html?q=Technology">Technology</a></li>
+                    <li class="nav-item"><a class="nav-link" href="/category/index.html?q=Technology">Technology</a>
+                    </li>
                     <li class="nav-item"><a class="nav-link" href="/category/index.html?q=Sports">Sports</a></li>
                     <li class="nav-item dropdown">
                         <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button"
@@ -35,7 +35,8 @@
                             More
                         </a>
                         <ul class="dropdown-menu" aria-labelledby="navbarDropdown">
-                            <li><a class="dropdown-item" href="/category/index.html?q=entertainment">Entertainment</a></li>
+                            <li><a class="dropdown-item" href="/category/index.html?q=entertainment">Entertainment</a>
+                            </li>
                             <li><a class="dropdown-item" href="/category/index.html?q=health">Health</a></li>
                             <li><a class="dropdown-item" href="/category/index.html?q=science">Science</a></li>
                         </ul>
@@ -43,8 +44,10 @@
                 </ul>
                 <!-- Search Form -->
                 <form class="d-flex search-form" id="searchForm">
-                    <input class="form-control me-2 text-white" type="search" placeholder="Search news..." aria-label="Search" id="searchInput">
+                    <input class="form-control me-2" type="search" placeholder="Search news..." aria-label="Search"
+                        id="searchInput">
                     <button class="btn btn-outline-light" type="submit">Search</button>
+                    <audio src="../assets/sound.mp3" id="audioPlayer" preload="auto"></audio>
                 </form>
             </div>
         </div>
@@ -53,7 +56,9 @@
     <main>
         <div class="container">
             <div class="d-flex justify-content-center mt-5 mb-4">
-                <h2 class="fw-bold btn-primary text-white d-inline-block category-heading text-capitalize px-4 py-2 rounded-pill"></h2>
+                <h2
+                    class="fw-bold btn-primary text-white d-inline-block category-heading text-capitalize px-4 py-2 rounded-pill">
+                </h2>
             </div>
             <div class="row news-list mt-4"></div>
         </div>
